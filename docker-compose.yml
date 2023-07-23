@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+  neo4j:
+    image: neo4j:latest
+    ports:
+      - 7474:7474
+      - 7687:7687
+    # volumes:
+    #   - neo4j_data:/data/
+    env_file:
+      - .env.neo4j
+  metric_service:
+    build:
+      context: ./metric_service
+    image: metric_service
+    volumes:
+      - ./metric_service:/app
+    ports:
+      - 5000:5000
+    depends_on:
+      - neo4j
+  app1:
+    build:
+      context: ./app1
+    image: app1
+    volumes:
+      - ./app1:/app
+    ports:
+      - 5001:5000
+    depends_on:
+      - neo4j
+    # environment:
+    #   - NEO4J_HOST=neo4j
+    #   - NEO4J_PORT=7687
+  app2:
+    build:
+      context: ./app2
+    image: app2
+    volumes:
+      - ./app2:/app
+    ports:
+      - 5002:5000
+    depends_on:
+      - neo4j
+  app3:
+    build:
+      context: ./app3
+    image: app3
+    volumes:
+      - ./app3:/app
+    ports:
+      - 5003:5000
+    depends_on:
+      - neo4j
+  
+# volumes:
+#   neo4j-data:
