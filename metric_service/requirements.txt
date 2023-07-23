@@ -1,2 +1,3 @@
 Flask>=2.3.2,<3.0
 neomodel
+requests>=2.31.0
