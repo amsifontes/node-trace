@@ -3,6 +3,8 @@ import logging
 import requests
 from flask import Flask
 
+import node_trace_client
+
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
